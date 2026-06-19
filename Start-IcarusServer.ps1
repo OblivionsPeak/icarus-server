@@ -63,17 +63,15 @@ $launchArgs = @(
   "-Log"
 )
 
-$marker = Join-Path $PSScriptRoot ".prospect-created"
-if ($cfg.Prospect.Create -and -not (Test-Path $marker)) {
-  $hc  = if ($cfg.Prospect.Hardcore) { 'true' } else { 'false' }
-  $spec = "$($cfg.Prospect.Type) $($cfg.Prospect.Difficulty) $hc $($cfg.Prospect.SaveName)"
-  $launchArgs += "-CreateProspect=`"$spec`""
-  Write-Host "First run: creating prospect [$spec]" -ForegroundColor Yellow
-  New-Item -ItemType File -Path $marker -Force | Out-Null
-} else {
-  $launchArgs += "-ResumeProspect"
-  Write-Host "Resuming existing prospect ($($cfg.Prospect.SaveName))" -ForegroundColor Green
-}
+# Prospect handling: we deliberately do NOT auto-create a world via the CLI,
+# because prospect/map IDs are version-specific and easy to get wrong (a bad ID
+# fails the launch). Instead the server boots and -ResumeProspect auto-loads the
+# last world if one exists; otherwise it waits in a lobby. Create your FIRST
+# world IN-GAME: connect with the Icarus client, enter the AdminPassword, and
+# create/launch a prospect from the prospect menu (the dropdowns guarantee valid
+# values). Restarts then resume it automatically.
+$launchArgs += "-ResumeProspect"
+Write-Host "Booting (will resume last world if one exists, else wait in lobby for in-game creation)." -ForegroundColor Green
 
 Write-Host ""
 Write-Host "Launching: $exe $($launchArgs -join ' ')" -ForegroundColor Cyan
