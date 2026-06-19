@@ -1,0 +1,28 @@
+{
+  "_comment": "Central config for the Icarus dedicated server toolkit. Edit values, then run the scripts. Paths use double backslashes.",
+
+  "ServerName": "Oblivion's Icarus Server",
+  "InstallDir": "C:\\IcarusServer",
+  "SteamCmdDir": "C:\\SteamCMD",
+
+  "Port": 17777,
+  "QueryPort": 27015,
+
+  "MaxPlayers": 8,
+  "JoinPassword": "",
+  "AdminPassword": "CHANGE_ME_admin_pw",
+
+  "ShutdownIfNotJoinedFor": 300,
+  "ShutdownIfEmptyFor": 300,
+  "AllowNonAdminsToLaunchProspects": true,
+  "AllowNonAdminsToDeleteProspects": false,
+
+  "Prospect": {
+    "_comment": "On first run a prospect (the world/save) is created. After that the server resumes it. Valid Type/Difficulty values must match in-game options — verify against the prospect menu.",
+    "Create": true,
+    "Type": "Olympus_PvE",
+    "Difficulty": "Medium",
+    "Hardcore": false,
+    "SaveName": "HomeBase"
+  }
+}
